@@ -46,6 +46,13 @@ class Timer{
           const currentTime = new Date();
           const deltaTime = chosenData - currentTime;
 
+          if (deltaTime <= 0) {
+            this.onTick({ days: "00", hours: "00", minutes: "00", seconds: "00" });
+            clearInterval(this.intervalId);
+            return;
+          }
+
+          
           const { days, hours, minutes, seconds } = this.convertMs(deltaTime);
           this.onTick({ days, hours, minutes, seconds } )
         }, 1000);
